@@ -4,24 +4,21 @@ import java.util.Random;
 
 public class Corrida {
 
-    private static int distanciaMaxima = 100;
+    private static int distanciaMaxima = 118;
     private static int larguraPista = 120;
     private static int pausaMs = 300;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         Random random = new Random();
-        Veiculo carro1 = new Veiculo('#', random);
-        Veiculo carro2 = new Veiculo('#', random);
+        Veiculo carro1 = new Veiculo('#');
+        Veiculo carro2 = new Veiculo('#');
 
-        while (carro1.getDistancia() < distanciaMaxima
-                && carro2.getDistancia() < distanciaMaxima) {
-
-            carro1.avancar();
-            carro2.avancar();
-
+        while (carro1.getDistancia() < distanciaMaxima && carro2.getDistancia() < distanciaMaxima) {
+            carro1.avancar(random);
+            carro2.avancar(random);
             imprimirPista(carro1, carro2);
-            Thread.sleep(pausaMs);
+            pausar(pausaMs);
         }
 
         anunciarResultado(carro1, carro2);
@@ -47,6 +44,13 @@ public class Corrida {
         } else {
             System.out.println("A corrida terminou em empate.");
         }
+    }
 
+    private static void pausar(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+
+        }
     }
 }
